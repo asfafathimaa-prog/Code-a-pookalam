@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Onam Pookalam with Flowers</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fff8dc;
+      margin: 0;
+      position: relative; /* needed for absolute positioning of title */
+      flex-direction: column; /* stack title and pookalam vertically */
+    }
+
+    .title {
+      position: relative; /* relative inside flex container */
+      width: 100%;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 48px;
+      color: #d2691e; /* warm brown-orange */
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #b5651d;
+      margin: 0 0 20px 0; /* margin bottom to separate from pookalam */
+    }
+
+    .pookalam {
+      position: relative;
+      width: 600px;
+      height: 600px;
+    }
+
+    .flower {
+      width: 66px; /* flower size */
+      height: 66px;
+      border-radius: 50%;
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .center {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-image: url("off white.jpg"); /* Center flower */
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      top: 240px;
+      left: 240px;
+      box-shadow: 0 0 20px gold;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">Happy Onam</h1>
+
+  <div class="pookalam" id="pookalam">
+    <div class="center"></div>
+  </div>
+
+  <script>
+    const pookalam = document.getElementById("pookalam");
+
+    function makeRing(radius, count, image) {
+      for (let i = 0; i < count; i++) {
+        const angle = (2 * Math.PI / count) * i;
+        const x = 300 + radius * Math.cos(angle) - 33; // 33 = half flower width
+        const y = 300 + radius * Math.sin(angle) - 33;
+
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.style.left = `${x}px`;
+        flower.style.top = `${y}px`;
+        flower.style.backgroundImage = `url('${image}')`;
+
+        pookalam.appendChild(flower);
+      }
+    }
+
+    // Adjusted flower rings for no gaps:
+    // More flowers and slightly smaller radii to pack tightly.
+    makeRing(255, 33, "red flower.jpg");        // outer ring
+    makeRing(210, 28, "dark green flower.jpg"); // second ring
+    makeRing(160, 24, "2561756.jpg");            // yellow ring
+    makeRing(110, 20, "Orange-roses-background.jpg"); // orange ring
+    makeRing(70, 16, "red flower.jpg");          // inner ring
+  </script>
+</body>
+</html>
